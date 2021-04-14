@@ -15,6 +15,7 @@ class WidgetPluginPreferences(context: Context) {
         private const val KEY_NAME = "name"
         private const val KEY_TITLE = "title"
         private const val KEY_VALUE = "value"
+        private const val KEY_TREND = "trend"
         private const val KEY_TAP_ACTION = "tapAction"
         private const val KEY_MESSAGE = "message"
 
@@ -33,6 +34,7 @@ class WidgetPluginPreferences(context: Context) {
             title: String?,
             value: String?,
             message: String?,
+            trend: Boolean?,
             tapAction: Int) {
         prefs.edit()
                 .putString(getWidgetKey(widgetId, KEY_NAME), name)
@@ -41,6 +43,12 @@ class WidgetPluginPreferences(context: Context) {
                 .putString(getWidgetKey(widgetId, KEY_MESSAGE), message)
                 .putInt(getWidgetKey(widgetId, KEY_TAP_ACTION), tapAction)
                 .apply()
+
+        if (trend == null) {
+            prefs.edit().remove(getWidgetKey(widgetId, KEY_TREND)).apply()
+        } else {
+            prefs.edit().putBoolean(getWidgetKey(widgetId, KEY_TREND), trend).apply()
+        }
     }
 
     fun getWidgetIdsForParameter(parameterId: String): List<Int> {
