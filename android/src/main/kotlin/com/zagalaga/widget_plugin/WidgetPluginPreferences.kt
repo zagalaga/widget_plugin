@@ -15,8 +15,7 @@ class WidgetPluginPreferences(context: Context) {
         private const val KEY_NAME = "name"
         private const val KEY_TITLE = "title"
         private const val KEY_VALUE = "value"
-        const val KEY_CAN_ADD_ENTRY = "canAddEntry"
-
+        private const val KEY_TAP_ACTION = "tapAction"
         private const val KEY_MESSAGE = "message"
 
         private const val WIDGETS_PREFS = "WidgetsPreferences"
@@ -28,20 +27,19 @@ class WidgetPluginPreferences(context: Context) {
         return "$widgetId.$key"
     }
 
-    fun updateTextContentWidget(widgetId: Int, name: String, title: String, value: String, canAddEntry: Boolean) {
+    fun updateTextContentWidget(
+            widgetId: Int,
+            name: String,
+            title: String?,
+            value: String?,
+            message: String?,
+            tapAction: Int) {
         prefs.edit()
                 .putString(getWidgetKey(widgetId, KEY_NAME), name)
                 .putString(getWidgetKey(widgetId, KEY_TITLE), title)
                 .putString(getWidgetKey(widgetId, KEY_VALUE), value)
-                .putBoolean(getWidgetKey(widgetId, KEY_CAN_ADD_ENTRY), canAddEntry)
-                .remove(getWidgetKey(widgetId, KEY_MESSAGE))
-                .apply()
-    }
-
-    fun updateMessageWidget(widgetId: Int, name: String, message: String) {
-        prefs.edit()
-                .putString(getWidgetKey(widgetId, KEY_NAME), name)
                 .putString(getWidgetKey(widgetId, KEY_MESSAGE), message)
+                .putInt(getWidgetKey(widgetId, KEY_TAP_ACTION), tapAction)
                 .apply()
     }
 

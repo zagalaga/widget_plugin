@@ -10,13 +10,15 @@ class WidgetPlugin {
   static const MethodChannel _channel = const MethodChannel('widget_plugin');
 
   static Future<void> updateTextContentWidget(
-      int widgetId, String name, String title, String value, bool canAddEntry) async {
-    await _channel.invokeMethod('updateTextContentWidget',
-        {"widgetId": widgetId, "name": name, "title": title, "value": value, "canAddEntry": canAddEntry});
-  }
-
-  static Future<void> updateMessageWidget(int widgetId, String name, String message) async {
-    await _channel.invokeMethod('updateMessageWidget', {"widgetId": widgetId, "name": name, "message": message});
+      int widgetId, String name, String title, String value, String message, int tapAction) async {
+    await _channel.invokeMethod('updateTextContentWidget', {
+      "widgetId": widgetId,
+      "name": name,
+      "title": title,
+      "value": value,
+      "message": message,
+      "tapAction": tapAction
+    });
   }
 
   static Future<List<int>> getWidgetIdsForParameter(String parameterId) async {

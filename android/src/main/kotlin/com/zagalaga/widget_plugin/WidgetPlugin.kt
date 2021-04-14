@@ -33,20 +33,10 @@ class WidgetPlugin : FlutterPlugin, MethodCallHandler {
                 prefs.updateTextContentWidget(
                         call.argument<Int>("widgetId")!!,
                         call.argument<String>("name")!!,
-                        call.argument<String>("title")!!,
-                        call.argument<String>("value")!!,
-                        call.argument<Boolean>("canAddEntry")!!)
-
-                updateWidget(call.argument<Int>("widgetId")!!)
-                result.success(true)
-            }
-
-            "updateMessageWidget" -> {
-                val prefs = WidgetPluginPreferences(context)
-                prefs.updateMessageWidget(
-                        call.argument<Int>("widgetId")!!,
-                        call.argument<String>("name")!!,
-                        call.argument<String>("message")!!)
+                        call.argument("title"),
+                        call.argument("value"),
+                        call.argument("message"),
+                        call.argument("tapAction")!!)
 
                 updateWidget(call.argument<Int>("widgetId")!!)
                 result.success(true)
