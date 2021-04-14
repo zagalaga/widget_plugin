@@ -22,6 +22,11 @@ class WidgetPlugin {
     });
   }
 
+  static Future<List<int>> getAllWidgetIds() async {
+    final List dynamicList = await _channel.invokeMethod('getAllWidgetIds');
+    return dynamicList.map<int>((element) => element as int).toList();
+  }
+
   static Future<List<int>> getWidgetIdsForParameter(String parameterId) async {
     final List dynamicList = await _channel.invokeMethod('getWidgetIdsForParameter', {"parameterId": parameterId});
     return dynamicList.map<int>((element) => element as int).toList();

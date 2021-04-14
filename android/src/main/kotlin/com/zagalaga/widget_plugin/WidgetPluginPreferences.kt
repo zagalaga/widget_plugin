@@ -2,7 +2,6 @@ package com.zagalaga.widget_plugin
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 
 /**
  * Keeps a mapping of widget ids to tracker keys in shared preferences
@@ -51,13 +50,16 @@ class WidgetPluginPreferences(context: Context) {
         }
     }
 
+    fun getAllWidgetIds(): List<Int> {
+        return prefs.all
+                .filter { (key, _) -> key.contains(KEY_PARAMETER_ID) }
+                .keys.map { it.substring(0, it.indexOf('.')).toInt() }
+    }
+
     fun getWidgetIdsForParameter(parameterId: String): List<Int> {
-        Log.d("WidgetPluginPreferences", "getWidgetIdsForParameter, all ${prefs.all}")
-        val result = prefs.all
+        return prefs.all
                 .filter { (key, value) -> key.contains(KEY_PARAMETER_ID) && value == parameterId }
-                .keys.map { it -> it.substring(0, it.indexOf('.')).toInt() }
-        Log.d("WidgetPluginPreferences", "getWidgetIdsForParameter, result $result")
-        return result
+                .keys.map { it.substring(0, it.indexOf('.')).toInt() }
     }
 
     fun getWidgetData(widgetId: Int, key: String): Any? {

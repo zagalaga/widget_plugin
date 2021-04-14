@@ -27,9 +27,10 @@ class WidgetPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
+        val prefs = WidgetPluginPreferences(context)
+
         when (call.method) {
             "updateTextContentWidget" -> {
-                val prefs = WidgetPluginPreferences(context)
                 prefs.updateTextContentWidget(
                         call.argument<Int>("widgetId")!!,
                         call.argument<String>("name")!!,
@@ -44,16 +45,18 @@ class WidgetPlugin : FlutterPlugin, MethodCallHandler {
             }
 
             "getWidgetIdsForParameter" -> {
-                val prefs = WidgetPluginPreferences(context)
                 val ids = prefs.getWidgetIdsForParameter(call.argument<String>("parameterId")!!)
+                result.success(ids)
+            }
+
+            "getAllWidgetIds" -> {
+                val ids = prefs.getAllWidgetIds()
                 result.success(ids)
             }
 
             "getWidgetData" -> {
                 val widgetId = call.argument<Int>("widgetId")!!
                 val key = call.argument<String>("key")!!
-
-                val prefs = WidgetPluginPreferences(context)
 
                 val value = prefs.getWidgetData(widgetId, key)
                 result.success(value)
