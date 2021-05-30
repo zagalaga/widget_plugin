@@ -9,8 +9,8 @@ import 'package:flutter/services.dart';
 class WidgetPlugin {
   static const MethodChannel _channel = const MethodChannel('widget_plugin');
 
-  static Future<void> updateTextContentWidget(
-      int widgetId, String name, String title, String value, String message, bool trend, int tapAction) async {
+  static Future<void> updateTextContentWidget(int widgetId, String name, String? title, String? value, String? message,
+      bool? trend, int tapAction) async {
     await _channel.invokeMethod('updateTextContentWidget', {
       "widgetId": widgetId,
       "name": name,
@@ -23,16 +23,17 @@ class WidgetPlugin {
   }
 
   static Future<List<int>> getAllWidgetIds() async {
-    final List dynamicList = await _channel.invokeMethod('getAllWidgetIds');
+    final List dynamicList = (await _channel.invokeMethod('getAllWidgetIds')) as List<dynamic>;
     return dynamicList.map<int>((element) => element as int).toList();
   }
 
   static Future<List<int>> getWidgetIdsForParameter(String parameterId) async {
-    final List dynamicList = await _channel.invokeMethod('getWidgetIdsForParameter', {"parameterId": parameterId});
+    final List dynamicList =
+    (await _channel.invokeMethod('getWidgetIdsForParameter', {"parameterId": parameterId})) as List<dynamic>;
     return dynamicList.map<int>((element) => element as int).toList();
   }
 
-  static Future<T> getWidgetData<T>(int widgetId, String key) {
+  static Future<T?> getWidgetData<T>(int widgetId, String key) {
     return _channel.invokeMethod<T>('getWidgetData', {'widgetId': widgetId, "key": key});
   }
 }
