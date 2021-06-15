@@ -1,11 +1,11 @@
 name: widget_plugin
 description: A plugin for widgets
 version: 0.0.1
-author:
-homepage:
+#author:
+#homepage:
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>2.12.3 <3.0.0'
   flutter: ">=1.20.0"
 
 dependencies:
