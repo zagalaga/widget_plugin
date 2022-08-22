@@ -72,7 +72,7 @@ class WidgetPlugin : FlutterPlugin, MethodCallHandler {
 
     private fun updateWidget(widgetId: Int) {
         try {
-            val javaClass = Class.forName("com.zagalaga.keeptrack.widget.WidgetProvider")
+            val javaClass = Class.forName("com.zagalaga.keeptrack.widget.ParameterTextWidget")
             val intent = Intent(context, javaClass)
             intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(widgetId))
