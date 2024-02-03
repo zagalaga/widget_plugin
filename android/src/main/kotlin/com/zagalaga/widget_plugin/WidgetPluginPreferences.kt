@@ -43,13 +43,18 @@ class WidgetPluginPreferences(context: Context) {
                 .putString(getWidgetKey(widgetId, KEY_VALUE), value)
                 .putString(getWidgetKey(widgetId, KEY_MESSAGE), message)
                 .putInt(getWidgetKey(widgetId, KEY_TAP_ACTION), tapAction)
-                .putBoolean(getWidgetKey(widgetId, KEY_IS_UP_GREEN), isUpGreen)
                 .apply()
 
         if (trend == null) {
             prefs.edit().remove(getWidgetKey(widgetId, KEY_TREND)).apply()
         } else {
             prefs.edit().putBoolean(getWidgetKey(widgetId, KEY_TREND), trend).apply()
+        }
+
+        if (isUpGreen == null) {
+            prefs.edit().remove(getWidgetKey(widgetId, KEY_IS_UP_GREEN)).apply()
+        } else {
+            prefs.edit().putBoolean(getWidgetKey(widgetId, KEY_IS_UP_GREEN), isUpGreen).apply()
         }
     }
 
