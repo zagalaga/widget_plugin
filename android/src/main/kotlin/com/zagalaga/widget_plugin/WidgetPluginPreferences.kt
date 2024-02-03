@@ -15,6 +15,7 @@ class WidgetPluginPreferences(context: Context) {
         private const val KEY_TITLE = "title"
         private const val KEY_VALUE = "value"
         private const val KEY_TREND = "trend"
+        private const val KEY_IS_UP_GREEN = "isUpGreen"
         private const val KEY_TAP_ACTION = "tapAction"
         private const val KEY_MESSAGE = "message"
 
@@ -34,6 +35,7 @@ class WidgetPluginPreferences(context: Context) {
             value: String?,
             message: String?,
             trend: Boolean?,
+            isUpGreen: Boolean?,
             tapAction: Int) {
         prefs.edit()
                 .putString(getWidgetKey(widgetId, KEY_NAME), name)
@@ -41,6 +43,7 @@ class WidgetPluginPreferences(context: Context) {
                 .putString(getWidgetKey(widgetId, KEY_VALUE), value)
                 .putString(getWidgetKey(widgetId, KEY_MESSAGE), message)
                 .putInt(getWidgetKey(widgetId, KEY_TAP_ACTION), tapAction)
+                .putBoolean(getWidgetKey(widgetId, KEY_IS_UP_GREEN), isUpGreen)
                 .apply()
 
         if (trend == null) {

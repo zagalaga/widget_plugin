@@ -10,13 +10,14 @@ class WidgetPlugin {
   static const MethodChannel _channel = const MethodChannel('widget_plugin');
 
   static Future<void> updateTextContentWidget(int widgetId, String name, String? title, String? value, String? message,
-      bool? trend, int tapAction) async {
+      bool? trend, bool? isUpGreen, int tapAction) async {
     await _channel.invokeMethod('updateTextContentWidget', {
       "widgetId": widgetId,
       "name": name,
       "title": title,
       "value": value,
       "trend": trend,
+      "isUpGreen": isUpGreen,
       "message": message,
       "tapAction": tapAction
     });

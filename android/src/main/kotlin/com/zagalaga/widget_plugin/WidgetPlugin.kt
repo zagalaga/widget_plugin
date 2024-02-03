@@ -38,6 +38,7 @@ class WidgetPlugin : FlutterPlugin, MethodCallHandler {
                         call.argument("value"),
                         call.argument("message"),
                         call.argument("trend"),
+                        call.argument("isUpGreen"),
                         call.argument("tapAction")!!)
 
                 updateWidget(call.argument<Int>("widgetId")!!)

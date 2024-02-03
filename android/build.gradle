@@ -3,7 +3,7 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     ext {
-        kotlin_version = '1.7.10'
+        kotlin_version = '1.9.10'
     }
 
     repositories {
@@ -21,13 +21,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 26
     }
     lintOptions {
         disable 'InvalidPackage'
