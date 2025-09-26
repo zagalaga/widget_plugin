@@ -30,6 +30,7 @@ class WidgetPluginPreferences(context: Context) {
 
     fun updateTextContentWidget(
             widgetId: Int,
+            parameterId: String,
             name: String,
             title: String?,
             value: String?,
@@ -38,6 +39,7 @@ class WidgetPluginPreferences(context: Context) {
             isUpGreen: Boolean?,
             tapAction: Int) {
         prefs.edit()
+                .putString(getWidgetKey(widgetId, KEY_PARAMETER_ID), parameterId)
                 .putString(getWidgetKey(widgetId, KEY_NAME), name)
                 .putString(getWidgetKey(widgetId, KEY_TITLE), title)
                 .putString(getWidgetKey(widgetId, KEY_VALUE), value)
@@ -72,5 +74,20 @@ class WidgetPluginPreferences(context: Context) {
 
     fun getWidgetData(widgetId: Int, key: String): Any? {
         return prefs.all[getWidgetKey(widgetId, key)]
+    }
+
+    fun getLaunchAction(): Int? {
+        return prefs.getInt("launch_action", -1).let { if (it == -1) null else it }
+    }
+
+    fun getLaunchParameterId(): String? {
+        return prefs.getString("launch_parameter_id", null)
+    }
+
+    fun clearLaunchData() {
+        prefs.edit()
+                .remove("launch_action")
+                .remove("launch_parameter_id")
+                .apply()
     }
 }
