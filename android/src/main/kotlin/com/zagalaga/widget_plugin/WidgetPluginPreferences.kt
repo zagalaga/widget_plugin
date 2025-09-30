@@ -75,19 +75,4 @@ class WidgetPluginPreferences(context: Context) {
     fun getWidgetData(widgetId: Int, key: String): Any? {
         return prefs.all[getWidgetKey(widgetId, key)]
     }
-
-    fun getLaunchAction(): Int? {
-        return prefs.getInt("launch_action", -1).let { if (it == -1) null else it }
-    }
-
-    fun getLaunchParameterId(): String? {
-        return prefs.getString("launch_parameter_id", null)
-    }
-
-    fun clearLaunchData() {
-        prefs.edit()
-                .remove("launch_action")
-                .remove("launch_parameter_id")
-                .apply()
-    }
 }
