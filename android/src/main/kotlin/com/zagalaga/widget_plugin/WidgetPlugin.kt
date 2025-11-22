@@ -32,15 +32,14 @@ class WidgetPlugin : FlutterPlugin, MethodCallHandler {
         when (call.method) {
             "updateTextContentWidget" -> {
                 prefs.updateTextContentWidget(
-                        call.argument<Int>("widgetId")!!,
-                        call.argument<String>("parameterId")!!,
-                        call.argument<String>("name")!!,
-                        call.argument("title"),
-                        call.argument("value"),
-                        call.argument("message"),
-                        call.argument("trend"),
-                        call.argument("isUpGreen"),
-                        call.argument("tapAction")!!)
+                    call.argument<Int>("widgetId")!!,
+                    call.argument<String>("name")!!,
+                    call.argument("title"),
+                    call.argument("value"),
+                    call.argument("message"),
+                    call.argument("trend"),
+                    call.argument("isUpGreen"),
+                    call.argument("tapAction")!!)
 
                 updateWidget(call.argument<Int>("widgetId")!!)
                 result.success(true)
@@ -74,7 +73,7 @@ class WidgetPlugin : FlutterPlugin, MethodCallHandler {
 
     private fun updateWidget(widgetId: Int) {
         try {
-            val javaClass = Class.forName("com.zagalaga.keeptrack.widget.ParameterTextGlanceWidgetReceiver")
+            val javaClass = Class.forName("com.zagalaga.keeptrack.widget.ParameterTextWidget")
             val intent = Intent(context, javaClass)
             intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(widgetId))

@@ -9,11 +9,10 @@ import 'package:flutter/services.dart';
 class WidgetPlugin {
   static const MethodChannel _channel = const MethodChannel('widget_plugin');
 
-  static Future<void> updateTextContentWidget(int widgetId, String parameterId, String name, String? title, String? value, String? message,
+  static Future<void> updateTextContentWidget(int widgetId, String name, String? title, String? value, String? message,
       bool? trend, bool? isUpGreen, int tapAction) async {
     await _channel.invokeMethod('updateTextContentWidget', {
       "widgetId": widgetId,
-      "parameterId": parameterId,
       "name": name,
       "title": title,
       "value": value,

@@ -29,23 +29,21 @@ class WidgetPluginPreferences(context: Context) {
     }
 
     fun updateTextContentWidget(
-            widgetId: Int,
-            parameterId: String,
-            name: String,
-            title: String?,
-            value: String?,
-            message: String?,
-            trend: Boolean?,
-            isUpGreen: Boolean?,
-            tapAction: Int) {
+        widgetId: Int,
+        name: String,
+        title: String?,
+        value: String?,
+        message: String?,
+        trend: Boolean?,
+        isUpGreen: Boolean?,
+        tapAction: Int) {
         prefs.edit()
-                .putString(getWidgetKey(widgetId, KEY_PARAMETER_ID), parameterId)
-                .putString(getWidgetKey(widgetId, KEY_NAME), name)
-                .putString(getWidgetKey(widgetId, KEY_TITLE), title)
-                .putString(getWidgetKey(widgetId, KEY_VALUE), value)
-                .putString(getWidgetKey(widgetId, KEY_MESSAGE), message)
-                .putInt(getWidgetKey(widgetId, KEY_TAP_ACTION), tapAction)
-                .apply()
+            .putString(getWidgetKey(widgetId, KEY_NAME), name)
+            .putString(getWidgetKey(widgetId, KEY_TITLE), title)
+            .putString(getWidgetKey(widgetId, KEY_VALUE), value)
+            .putString(getWidgetKey(widgetId, KEY_MESSAGE), message)
+            .putInt(getWidgetKey(widgetId, KEY_TAP_ACTION), tapAction)
+            .apply()
 
         if (trend == null) {
             prefs.edit().remove(getWidgetKey(widgetId, KEY_TREND)).apply()
@@ -62,14 +60,14 @@ class WidgetPluginPreferences(context: Context) {
 
     fun getAllWidgetIds(): List<Int> {
         return prefs.all
-                .filter { (key, _) -> key.contains(KEY_PARAMETER_ID) }
-                .keys.map { it.substring(0, it.indexOf('.')).toInt() }
+            .filter { (key, _) -> key.contains(KEY_PARAMETER_ID) }
+            .keys.map { it.substring(0, it.indexOf('.')).toInt() }
     }
 
     fun getWidgetIdsForParameter(parameterId: String): List<Int> {
         return prefs.all
-                .filter { (key, value) -> key.contains(KEY_PARAMETER_ID) && value == parameterId }
-                .keys.map { it.substring(0, it.indexOf('.')).toInt() }
+            .filter { (key, value) -> key.contains(KEY_PARAMETER_ID) && value == parameterId }
+            .keys.map { it.substring(0, it.indexOf('.')).toInt() }
     }
 
     fun getWidgetData(widgetId: Int, key: String): Any? {
